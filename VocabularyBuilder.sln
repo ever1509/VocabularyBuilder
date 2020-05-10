@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VocabularyBuilder.Domain", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VocabularyBuilder.Data", "src\VocabularyBuilder.Data\VocabularyBuilder.Data.csproj", "{F14475A0-1D61-4847-A24E-EF4354DCF3DD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VocabularyBuilder.Application", "src\VocabularyBuilder.Application\VocabularyBuilder.Application.csproj", "{210BB358-1109-4F87-BDAE-9FBD27ABB8D0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{F14475A0-1D61-4847-A24E-EF4354DCF3DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F14475A0-1D61-4847-A24E-EF4354DCF3DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F14475A0-1D61-4847-A24E-EF4354DCF3DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{210BB358-1109-4F87-BDAE-9FBD27ABB8D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{210BB358-1109-4F87-BDAE-9FBD27ABB8D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{210BB358-1109-4F87-BDAE-9FBD27ABB8D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{210BB358-1109-4F87-BDAE-9FBD27ABB8D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
