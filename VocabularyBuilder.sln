@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VocabularyBuilder.Domain", "src\VocabularyBuilder.Domain\VocabularyBuilder.Domain.csproj", "{D0911F85-0D35-4079-83AC-8DB9D38D536C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VocabularyBuilder.Data", "src\VocabularyBuilder.Data\VocabularyBuilder.Data.csproj", "{F14475A0-1D61-4847-A24E-EF4354DCF3DD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D0911F85-0D35-4079-83AC-8DB9D38D536C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0911F85-0D35-4079-83AC-8DB9D38D536C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0911F85-0D35-4079-83AC-8DB9D38D536C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0911F85-0D35-4079-83AC-8DB9D38D536C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F14475A0-1D61-4847-A24E-EF4354DCF3DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F14475A0-1D61-4847-A24E-EF4354DCF3DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F14475A0-1D61-4847-A24E-EF4354DCF3DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F14475A0-1D61-4847-A24E-EF4354DCF3DD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {72D641A8-7871-4240-862A-8E61A50B27D6}
+	EndGlobalSection
+EndGlobal
