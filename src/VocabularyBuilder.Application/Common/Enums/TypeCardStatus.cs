@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace VocabularyBuilder.Application.Common
+namespace VocabularyBuilder.Application.Common.Enums
 {
     public enum TypeCardStatus
     {
-        Daily=1,
-        Weekly=2,
-        Monthly=3
+        Daily = 1,
+        Weekly = 2,
+        Monthly = 3
     }
 }

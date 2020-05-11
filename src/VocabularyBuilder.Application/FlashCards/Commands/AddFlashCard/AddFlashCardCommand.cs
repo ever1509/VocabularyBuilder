@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using VocabularyBuilder.Application.Common;
+using VocabularyBuilder.Application.Common.Enums;
 
 namespace VocabularyBuilder.Application.FlashCards.Commands.AddFlashCard
 {
