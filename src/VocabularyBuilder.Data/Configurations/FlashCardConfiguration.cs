@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using VocabularyBuilder.Domain.Entities;
 
@@ -11,7 +8,7 @@ namespace VocabularyBuilder.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<FlashCard> builder)
         {
-            builder.HasKey(e => new {e.CategoryId, e.TypeCardId});
+            builder.HasKey(e => e.FlashCardId);
             builder.Property(e => e.MainWord).HasColumnType("varchar(50)");
             builder.Property(e => e.Example).HasColumnType("varchar(1000)").IsRequired(false);
             builder.Property(e => e.FlashCardDate).HasColumnType("datetime").IsRequired(false);

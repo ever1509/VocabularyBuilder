@@ -1,9 +1,9 @@
 ﻿using MediatR;
 using VocabularyBuilder.Application.Common;
 
-namespace VocabularyBuilder.Application.FlashCards.Commands.AddFlashCard
+namespace VocabularyBuilder.Application.FlashCards.Commands.UpdateFlashCard
 {
-    public class AddFlashCardCommand : IRequest<int>
+    public class UpdateFlashCardCommand:IRequest
     {
         public int Id { get; set; }
         public string MainWord { get; set; }
@@ -11,6 +11,7 @@ namespace VocabularyBuilder.Application.FlashCards.Commands.AddFlashCard
         public int Category { get; set; }
         public TypeCardStatus TypeCard { get; set; }
         public string Meaning { get; set; }
+        public int MeaningId { get; set; }
         public byte[] Picture { get; set; }
     }
 }

@@ -9,6 +9,8 @@ namespace VocabularyBuilder.Domain.Entities
         public FlashCard()
         {
         }
+
+        public int FlashCardId { get; set; }
         public string MainWord { get; set; }
         public string Example { get; set; }
         public int CategoryId { get; set; }

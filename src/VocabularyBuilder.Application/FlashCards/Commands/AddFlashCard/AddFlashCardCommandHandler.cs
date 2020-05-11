@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoMapper;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using VocabularyBuilder.Data;
@@ -11,7 +8,7 @@ using VocabularyBuilder.Domain.Entities;
 
 namespace VocabularyBuilder.Application.FlashCards.Commands.AddFlashCard
 {
-    public class AddFlashCardCommandHandler:IRequestHandler<AddFlashCardCommand>
+    public class AddFlashCardCommandHandler:IRequestHandler<AddFlashCardCommand,int>
     {
         private readonly VocabularyBuilderContext _context;
         private ILogger<AddFlashCardCommandHandler> _logger;
@@ -21,7 +18,7 @@ namespace VocabularyBuilder.Application.FlashCards.Commands.AddFlashCard
             _context = context;
             _logger = logger;
         }
-        public async Task<Unit> Handle(AddFlashCardCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(AddFlashCardCommand request, CancellationToken cancellationToken)
         {
             
 
@@ -41,7 +38,7 @@ namespace VocabularyBuilder.Application.FlashCards.Commands.AddFlashCard
 
              await _context.SaveChangesAsync(cancellationToken);
 
-             return Unit.Value;
+             return entity.FlashCardId;
         }
 
         private async Task<int> NewMeaning(string requestMeaning, CancellationToken cancellationToken)
