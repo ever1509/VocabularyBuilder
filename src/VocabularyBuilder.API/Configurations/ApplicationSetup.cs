@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using VocabularyBuilder.Application.Categories.Queries.GetCategories;
 using VocabularyBuilder.Application.Common.Behaviours;
 using VocabularyBuilder.Application.Common.Mappings;
@@ -42,6 +46,12 @@ namespace VocabularyBuilder.API.Configurations
             services.AddMediatR(typeof(DeleteFlashCardCommand).GetTypeInfo().Assembly);
             services.AddMediatR(typeof(GetFlashCardsQuery).GetTypeInfo().Assembly);
             services.AddMediatR(typeof(GetCategoriesQuery).GetTypeInfo().Assembly);
+
+
+            
+
+
+
 
             return services;
         }
