@@ -24,16 +24,21 @@ namespace VocabularyBuilder.Application.FlashCards.Queries.GetFlashCards
         }
         public async Task<FlashCardsListVm> Handle(GetFlashCardsQuery request, CancellationToken cancellationToken)
         {
-            var flashcards = await _context.FlashCards
-                .Include(e=>e.Meaning)
-                .Where(f => f.TypeCardId == (int) request.TypeCard)
-                .ProjectTo<FlashCardDto>(_mapper.ConfigurationProvider)
-                .ToListAsync(cancellationToken);
-
-            return new FlashCardsListVm()
+            if (_context.FlashCards.Any())
             {
-                FlashCards = flashcards
-            };
+                var flashcards = await _context.FlashCards
+                    .Include(e => e.Meaning)
+                    .Where(f => f.TypeCardId == (int)request.TypeCard)
+                    .ProjectTo<FlashCardDto>(_mapper.ConfigurationProvider)
+                    .ToListAsync(cancellationToken);
+
+                return new FlashCardsListVm()
+                {
+                    FlashCards = flashcards
+                };
+            }
+
+            return new FlashCardsListVm();
         }
     }
 }
