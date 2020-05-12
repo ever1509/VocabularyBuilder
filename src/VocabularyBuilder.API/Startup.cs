@@ -95,7 +95,7 @@ namespace VocabularyBuilder.API
                 c.SwaggerDoc("VocabularyBuilderAPI",info);
                 c.ResolveConflictingActions(apiDescriptions=>apiDescriptions.First());
 
-                //Adding configuration of jwt for swagger UI 
+                //Adding configuration of jwt for swagger UI ----------------------------------
 
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
                 {
@@ -125,6 +125,7 @@ namespace VocabularyBuilder.API
                         new List<string>()
                     }
                 });
+                //----------------------------------------
             });
 
             services.AddDatabaseSeup(Configuration);
