@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\VocabularyBuilder.Application\VocabularyBuilder.Application.csproj" />
+    <ProjectReference Include="..\VocabularyBuilder.Infrastructure\VocabularyBuilder.Infrastructure.csproj" />
   </ItemGroup>
 
 

@@ -62,6 +62,7 @@ namespace VocabularyBuilder.API
                         ValidateLifetime = true
                     };
                 });
+              // .AddIdentityServerJwt();
 
             //For Jwt configuration End----------------------------------------------------------------------------------------------
 
