@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VocabularyBuilder.Data;
 
 namespace VocabularyBuilder.Data.Migrations
 {
     [DbContext(typeof(VocabularyBuilderContext))]
-    partial class VocabularyBuilderContextModelSnapshot : ModelSnapshot
+    [Migration("20200513043459_AddedRefreshtoken")]
+    partial class AddedRefreshtoken
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -96,7 +98,6 @@ namespace VocabularyBuilder.Data.Migrations
             modelBuilder.Entity("VocabularyBuilder.Domain.Entities.RefreshToken", b =>
                 {
                     b.Property<string>("Token")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreationDate")

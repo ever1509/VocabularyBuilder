@@ -19,6 +19,8 @@ namespace VocabularyBuilder.Data
         public DbSet<TypeCard> TypeCards { get; set; }
         public DbSet<Meaning> Meanings { get; set; }
         public DbSet<FlashCard> FlashCards { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
+        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -26,6 +28,7 @@ namespace VocabularyBuilder.Data
             modelBuilder.ApplyConfiguration(new TypeCardConfiguration());
             modelBuilder.ApplyConfiguration(new MeaningConfiguration());
             modelBuilder.ApplyConfiguration(new FlashCardConfiguration());
+            modelBuilder.ApplyConfiguration(new RefreshTokenConfiguration());
 
         }
     }

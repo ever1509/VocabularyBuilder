@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IdentityModel.Client;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -44,7 +45,9 @@ namespace VocabularyBuilder.API.Controllers
 
             return Ok(new AuthSuccessResponse
             {
-                Token = authResponse.Token
+                Token = authResponse.Token,
+                RefreshToken = authResponse.RefreshToken
+                
             });
         }
         [HttpPost("Login")]
@@ -62,7 +65,28 @@ namespace VocabularyBuilder.API.Controllers
 
             return Ok(new AuthSuccessResponse
             {
-                Token = authResponse.Token
+                Token = authResponse.Token,
+                RefreshToken = authResponse.RefreshToken
+            });
+        }
+
+        [HttpPost("Refresh")]
+        public async Task<IActionResult> Refresh([FromBody] Infrastructure.Identity.RefreshTokenRequest request)
+        {
+            var authResponse = await _identityService.RefreshTokenAsync(request.Token, request.RefreshToken);
+
+            if (!authResponse.Success)
+            {
+                return BadRequest(new AuthFailedResponse
+                {
+                    Errors = authResponse.Errors
+                });
+            }
+
+            return Ok(new AuthSuccessResponse
+            {
+                Token = authResponse.Token,
+                RefreshToken = authResponse.RefreshToken
             });
         }
     }
