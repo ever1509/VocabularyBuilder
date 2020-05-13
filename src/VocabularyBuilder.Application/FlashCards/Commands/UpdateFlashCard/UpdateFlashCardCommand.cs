@@ -4,7 +4,7 @@ using VocabularyBuilder.Application.Common.Enums;
 
 namespace VocabularyBuilder.Application.FlashCards.Commands.UpdateFlashCard
 {
-    public class UpdateFlashCardCommand:IRequest
+    public class UpdateFlashCardCommand:IRequest<bool>
     {
         public int Id { get; set; }
         public string MainWord { get; set; }
@@ -14,5 +14,6 @@ namespace VocabularyBuilder.Application.FlashCards.Commands.UpdateFlashCard
         public string Meaning { get; set; }
         public int MeaningId { get; set; }
         public byte[] Picture { get; set; }
+        public string UserId { get; set; }
     }
 }

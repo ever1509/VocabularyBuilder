@@ -30,7 +30,8 @@ namespace VocabularyBuilder.Application.FlashCards.Commands.AddFlashCard
                 FlashCardPicture = request.Picture,
                 TypeCardId = (int)request.TypeCard,
                 FlashCardDate = DateTime.Now,
-                MeaningId = await NewMeaning(request.Meaning,cancellationToken)
+                MeaningId = await NewMeaning(request.Meaning,cancellationToken),
+                UserId = request.UserId
 
             };
 

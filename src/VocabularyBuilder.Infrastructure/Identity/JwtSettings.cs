@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace VocabularyBuilder.API.Configurations
+namespace VocabularyBuilder.Infrastructure.Identity
 {
     public class JwtSettings
     {

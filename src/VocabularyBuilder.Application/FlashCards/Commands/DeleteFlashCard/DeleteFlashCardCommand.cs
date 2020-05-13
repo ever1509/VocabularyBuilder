@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using MediatR;
+﻿using MediatR;
 
 namespace VocabularyBuilder.Application.FlashCards.Commands.DeleteFlashCard
 {
-    public class  DeleteFlashCardCommand:IRequest
+    public class  DeleteFlashCardCommand:IRequest<bool>
     {
         public int Id { get; set; }
+        public string UserId { get; set; }
     }
 }

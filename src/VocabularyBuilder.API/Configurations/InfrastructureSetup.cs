@@ -21,9 +21,10 @@ namespace VocabularyBuilder.API.Configurations
             services.AddDefaultIdentity<ApplicationUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
+            services.AddTransient<IIdentityService, IdentityService>();
             //TODO: Create variable environment to handle injections for tests condition
 
-           // services.AddIdentityServer().AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
+            // services.AddIdentityServer().AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
 
 
             return services;

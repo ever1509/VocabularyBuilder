@@ -7,15 +7,21 @@ using VocabularyBuilder.Data;
 
 namespace VocabularyBuilder.Application.FlashCards.Commands.UpdateFlashCard
 {
-    public class UpdateFlashCardCommandHandler :IRequestHandler<UpdateFlashCardCommand>
+    public class UpdateFlashCardCommandHandler :IRequestHandler<UpdateFlashCardCommand,bool>
     {
         private readonly VocabularyBuilderContext _context;
         public UpdateFlashCardCommandHandler(VocabularyBuilderContext context)
         {
             _context = context;
         }
-        public async Task<Unit> Handle(UpdateFlashCardCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(UpdateFlashCardCommand request, CancellationToken cancellationToken)
         {
+
+            if (!(await IsFlashCardUserOwnAsync(request)))
+            {
+                return false;
+            }
+
             var entity = await _context.FlashCards.SingleOrDefaultAsync(f => f.FlashCardId == request.Id, cancellationToken: cancellationToken);
 
             if (entity == null)
@@ -29,7 +35,25 @@ namespace VocabularyBuilder.Application.FlashCards.Commands.UpdateFlashCard
 
             await _context.SaveChangesAsync(cancellationToken);
 
-            return Unit.Value;
+
+
+            return true;
+        }
+
+        private async Task<bool> IsFlashCardUserOwnAsync(UpdateFlashCardCommand request)
+        {
+            var fc = await _context.FlashCards.AsNoTracking().SingleOrDefaultAsync(f => f.FlashCardId == request.Id);
+            if (fc == null)
+            {
+                return false;
+            }
+
+            if(fc.UserId != request.UserId)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

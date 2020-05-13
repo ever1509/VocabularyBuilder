@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Extensions.Logging;
 using VocabularyBuilder.Application.Categories.Queries.GetCategories;
 using VocabularyBuilder.Application.Common.Enums;
@@ -14,10 +16,12 @@ using VocabularyBuilder.Application.FlashCards.Commands.AddFlashCard;
 using VocabularyBuilder.Application.FlashCards.Commands.DeleteFlashCard;
 using VocabularyBuilder.Application.FlashCards.Commands.UpdateFlashCard;
 using VocabularyBuilder.Application.FlashCards.Queries.GetFlashCards;
+using VocabularyBuilder.Infrastructure.Identity.Extensions;
 
 namespace VocabularyBuilder.API.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize(AuthenticationSchemes =JwtBearerDefaults.AuthenticationScheme)]
     [ApiController]
     [EnableCors("AllowVocabularyBuilderApp")]
     public class FlashCardController : ControllerBase
@@ -35,30 +39,39 @@ namespace VocabularyBuilder.API.Controllers
         [AllowAnonymous]
         public async Task<ActionResult<FlashCardsListVm>> GetFlashCards(TypeCardStatus typeCard)
         {
-            var vm = await _mediator.Send(new GetFlashCardsQuery() {TypeCard = typeCard});
+            var vm = await _mediator.Send(new GetFlashCardsQuery() {TypeCard = typeCard,UserId=HttpContext.GetUserId()});
             return Ok(vm);
         }
 
-        [HttpPost]
+        [HttpPost("AddFlashCard")]
         public async Task<ActionResult<int>> Create([FromBody] AddFlashCardCommand command)
         {
+            command.UserId = HttpContext.GetUserId();
             var movieId = await _mediator.Send(command);
             return Ok(movieId);
         }
 
-        [HttpPut]
+        [HttpPut("UpdateFlashCard")]
         public async Task<IActionResult> Update([FromBody] UpdateFlashCardCommand command)
         {
-            await _mediator.Send(command);
+            command.UserId = HttpContext.GetUserId();
+            var result =await _mediator.Send(command);
+
+            if (!result)
+                return BadRequest(new { error = "You do not own this FlashCard" });
 
             return NoContent();
+
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("DeleteFlashCard/{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> Delete(int id)
-        {
-            await _mediator.Send(new DeleteFlashCardCommand() {Id = id});
+        {            
+            var result =await _mediator.Send(new DeleteFlashCardCommand() {Id = id, UserId= HttpContext.GetUserId()});
+
+            if(!result)
+                return BadRequest(new { error = "You do not own this FlashCard" });
 
             return NoContent();
         }

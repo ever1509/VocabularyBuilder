@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -9,7 +7,7 @@ using VocabularyBuilder.Data;
 
 namespace VocabularyBuilder.Application.FlashCards.Commands.DeleteFlashCard
 {
-    public class DeleteFlashCardCommandHandler:IRequestHandler<DeleteFlashCardCommand>
+    public class DeleteFlashCardCommandHandler:IRequestHandler<DeleteFlashCardCommand,bool>
     {
         private readonly VocabularyBuilderContext _context;
 
@@ -17,10 +15,14 @@ namespace VocabularyBuilder.Application.FlashCards.Commands.DeleteFlashCard
         {
             _context = context;
         }
-        public async Task<Unit> Handle(DeleteFlashCardCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(DeleteFlashCardCommand request, CancellationToken cancellationToken)
         {
-            var entity =
-                await _context.FlashCards.FindAsync(request.Id);
+            if (!(await IsFlashCardUserOwnAsync(request)))
+            {
+                return false;
+            }
+
+            var entity = await _context.FlashCards.FindAsync(request.Id);
 
             if (entity == null)
                 throw new Exception($"{nameof(FlashCards)} not found the entity with the Id {request.Id}");
@@ -29,7 +31,23 @@ namespace VocabularyBuilder.Application.FlashCards.Commands.DeleteFlashCard
 
             await _context.SaveChangesAsync(cancellationToken);
 
-            return Unit.Value;
+            return true;
+        }
+
+        private async Task<bool> IsFlashCardUserOwnAsync(DeleteFlashCardCommand request)
+        {
+            var fc = await _context.FlashCards.AsNoTracking().SingleOrDefaultAsync(f => f.FlashCardId == request.Id);
+            if (fc == null)
+            {
+                return false;
+            }
+
+            if (fc.UserId != request.UserId)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
