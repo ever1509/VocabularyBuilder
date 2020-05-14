@@ -1,0 +1,60 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using VocabularyBuilder.Application.Common.Enums;
+using VocabularyBuilder.Application.FlashCards.Commands.AddFlashCard;
+using VocabularyBuilder.Infrastructure.Identity;
+
+namespace VocabularyBuilder.API.IntegrationTests.Base
+{
+    public class IntegrationTestBase :AppTestFixture
+    {
+        protected readonly HttpClient TestClient;
+        protected IntegrationTestBase()
+        {
+            var fixture = new AppTestFixture();
+            TestClient = fixture.CreateClient();
+        }
+
+        protected async Task AuthenticateAsync(bool refreshToken = false)
+        {
+            TestClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", await GetJwtAsync(refreshToken));
+        }
+
+        protected async Task<int> AddFlashCardAsync()
+        {
+            var command = GetFlashCardCommand();
+
+            var response = await TestClient.PostAsJsonAsync("api/FlashCard/AddFlashCard", command);
+
+            return await response.Content.ReadAsAsync<int>();
+        }
+        private async Task<string> GetJwtAsync(bool refreshToken)
+        {
+            var response = await TestClient.PostAsJsonAsync("api/Identity/Register", new UserRegistrationRequest()
+            {
+                Email = "test@integration.com",
+                Password = "SomePass1234!"
+            });
+
+            var registrationResponse = await response.Content.ReadAsAsync<AuthSuccessResponse>();
+
+            return registrationResponse.Token;
+        }
+        private AddFlashCardCommand GetFlashCardCommand()
+        {
+            return new AddFlashCardCommand()
+            {
+                MainWord = "HeadSets",
+                Meaning = "Object used to listening to music with the ears",
+                Example = "I have using headset all day",
+                Category = 2,
+                TypeCard = TypeCardStatus.Daily,
+                Picture = new byte[4]
+            };
+        }
+    }
+}
