@@ -42,14 +42,9 @@ namespace VocabularyBuilder.API.Configurations
                     options.TokenValidationParameters = tokenValidationParameters;
 
                 });
-            // .AddIdentityServerJwt();
-
             //For Jwt configuration End----------------------------------------------------------------------------------------------
 
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("User", builder => { builder.RequireClaim("User.view", "true"); });
-            });
+            services.AddAuthorization();
 
             return services;
         }

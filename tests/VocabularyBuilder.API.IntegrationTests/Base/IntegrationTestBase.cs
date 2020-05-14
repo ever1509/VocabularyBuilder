@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using VocabularyBuilder.Application.Common.Enums;
 using VocabularyBuilder.Application.FlashCards.Commands.AddFlashCard;
 using VocabularyBuilder.Infrastructure.Identity;
+using VocabularyBuilder.Infrastructure.Identity.Enums;
 
 namespace VocabularyBuilder.API.IntegrationTests.Base
 {
@@ -37,7 +38,8 @@ namespace VocabularyBuilder.API.IntegrationTests.Base
             var response = await TestClient.PostAsJsonAsync("api/Identity/Register", new UserRegistrationRequest()
             {
                 Email = "test@integration.com",
-                Password = "SomePass1234!"
+                Password = "SomePass1234!",
+                Role = UserRoles.Admin
             });
 
             var registrationResponse = await response.Content.ReadAsAsync<AuthSuccessResponse>();

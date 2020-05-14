@@ -10,22 +10,25 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using VocabularyBuilder.Data;
 using VocabularyBuilder.Domain.Entities;
+using VocabularyBuilder.Infrastructure.Identity.Enums;
 
 namespace VocabularyBuilder.Infrastructure.Identity
 {
     public class IdentityService : IIdentityService
     {
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly JwtSettings _jwtSettings;
         private readonly TokenValidationParameters _tokenValidationParameters;
         private readonly VocabularyBuilderContext _context;
 
-        public IdentityService(UserManager<ApplicationUser> userManager, JwtSettings jwtSettings, TokenValidationParameters tokenValidationParameters, VocabularyBuilderContext context)
+        public IdentityService(UserManager<ApplicationUser> userManager, JwtSettings jwtSettings, TokenValidationParameters tokenValidationParameters, VocabularyBuilderContext context, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _jwtSettings = jwtSettings;
             _tokenValidationParameters = tokenValidationParameters;
             _context = context;
+            _roleManager = roleManager;
         }
 
         public async Task<AuthenticationResult> LoginAsync(string email, string password)
@@ -73,7 +76,6 @@ namespace VocabularyBuilder.Infrastructure.Identity
 
             var expiryDateTimeUtc = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)
                 .AddSeconds(expiryDateUnix);
-               // .Subtract(_jwtSettings.TokenLifetime);
 
             if (expiryDateTimeUtc > DateTime.UtcNow)
             {
@@ -124,7 +126,7 @@ namespace VocabularyBuilder.Infrastructure.Identity
             return await GenerateAuthenticationResultForUserAsync(user);
         }
 
-        public async Task<AuthenticationResult> RegisterAsync(string email, string password)
+        public async Task<AuthenticationResult> RegisterAsync(string email, string password,UserRoles role)
         {
             var existingUser = await _userManager.FindByEmailAsync(email);
 
@@ -154,7 +156,10 @@ namespace VocabularyBuilder.Infrastructure.Identity
                 };
             }
 
-            await _userManager.AddClaimAsync(newUser, new Claim("User.view", "true"));
+            await AssignRoleToUser(role,newUser);
+            
+
+            //await _userManager.AddClaimAsync(newUser, new Claim("User.view", "true"));
 
             return await GenerateAuthenticationResultForUserAsync(newUser);
         }
@@ -173,12 +178,26 @@ namespace VocabularyBuilder.Infrastructure.Identity
                 new Claim("id", user.Id)
             };
 
-
+            //In case we add policy to user by claim
             var userClaims = await _userManager.GetClaimsAsync(user);
-
             claims.AddRange(userClaims);
 
-
+            //Adding roleClaim of User in jwt claims
+            var userRoles = await _userManager.GetRolesAsync(user);
+            foreach (var userRole in userRoles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role,userRole));
+                var role = await _roleManager.FindByNameAsync(userRole);
+                if(role==null) continue;
+                var roleClaims = await _roleManager.GetClaimsAsync(role);
+                foreach (var roleClaim in roleClaims)
+                {
+                    if(claims.Contains(roleClaim))
+                        continue;
+                    
+                    claims.Add(roleClaim);
+                }
+            }
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
@@ -236,6 +255,19 @@ namespace VocabularyBuilder.Infrastructure.Identity
             return (validatedToken is JwtSecurityToken jwtSecurityToken) &&
                    jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256,
                        StringComparison.InvariantCultureIgnoreCase);
+        }
+
+        private async Task AssignRoleToUser(UserRoles role, ApplicationUser user)
+        {
+            switch (role)
+            {
+                case UserRoles.Admin:
+                    await _userManager.AddToRoleAsync(user, "Admin");
+                    break;
+                case UserRoles.User:
+                    await _userManager.AddToRoleAsync(user, "User");
+                    break;
+            }
         }
     }
 }
