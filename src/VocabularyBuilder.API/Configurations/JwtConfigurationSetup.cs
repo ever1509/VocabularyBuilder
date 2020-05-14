@@ -46,6 +46,10 @@ namespace VocabularyBuilder.API.Configurations
 
             //For Jwt configuration End----------------------------------------------------------------------------------------------
 
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("User", builder => { builder.RequireClaim("User.view", "true"); });
+            });
 
             return services;
         }

@@ -36,6 +36,7 @@ namespace VocabularyBuilder.API.Controllers
         }
 
         [HttpGet("GetFlashCards/{typeCard:int}")]
+        [Authorize(Policy = "User")]
         public async Task<ActionResult<FlashCardsListVm>> GetFlashCards(TypeCardStatus typeCard)
         {
             var vm = await _mediator.Send(new GetFlashCardsQuery() {TypeCard = typeCard,UserId=HttpContext.GetUserId()});
