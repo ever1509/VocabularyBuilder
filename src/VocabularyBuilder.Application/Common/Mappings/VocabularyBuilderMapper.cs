@@ -21,40 +21,14 @@ namespace VocabularyBuilder.Application.Common.Mappings
 
 
             CreateMap<FlashCard, FlashCardDto>()
-                .ForMember(d => d.TypeCard, opt => opt.MapFrom(e => AddTypeCard(e)))
-                .ForMember(d=>d.Meaning,opt=>opt.MapFrom(e=>AddDescription(e)))
-                .ForMember(d=>d.MeaningId,opt=>opt.MapFrom(e=>e.MeaningId))
+                .ForMember(d => d.TypeCard, opt => opt.MapFrom(e =>(TypeCardStatus)e.TypeCardId))
+                .ForMember(d=>d.Meaning,opt=>opt.MapFrom(e=>e.Meaning))
                 .ForMember(d=>d.MainWord,opt=>opt.MapFrom(e=>e.MainWord))
                 .ForMember(d=>d.Id,opt=>opt.MapFrom(e=>e.FlashCardId))
                 .ForMember(d=>d.Example,opt=>opt.MapFrom(e=>e.Example));
 
 
 
-        }
-
-        private TypeCardStatus AddTypeCard(FlashCard flashCard)
-        {
-            if (flashCard == null)
-                throw new Exception("It doesn't exist the flashcard");
-
-            switch (flashCard.TypeCardId)
-            {
-                case 1:
-                    return TypeCardStatus.Daily;
-                case 2:
-                    return TypeCardStatus.Weekly;
-                case 3:
-                    return TypeCardStatus.Monthly;
-            }
-
-            return 0;
-        }
-
-        private string AddDescription(FlashCard flashCard)
-        {
-            if (flashCard == null)
-                return String.Empty;
-            return flashCard.Meaning.Description;
         }
     }
 }

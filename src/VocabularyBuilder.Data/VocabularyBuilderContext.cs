@@ -17,7 +17,6 @@ namespace VocabularyBuilder.Data
 
         public DbSet<Category> Categories { get; set; }
         public DbSet<TypeCard> TypeCards { get; set; }
-        public DbSet<Meaning> Meanings { get; set; }
         public DbSet<FlashCard> FlashCards { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
         
@@ -26,7 +25,6 @@ namespace VocabularyBuilder.Data
         {
             modelBuilder.ApplyConfiguration(new CategoryConfiguration());
             modelBuilder.ApplyConfiguration(new TypeCardConfiguration());
-            modelBuilder.ApplyConfiguration(new MeaningConfiguration());
             modelBuilder.ApplyConfiguration(new FlashCardConfiguration());
             modelBuilder.ApplyConfiguration(new RefreshTokenConfiguration());
 

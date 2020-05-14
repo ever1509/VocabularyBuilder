@@ -32,6 +32,7 @@ namespace VocabularyBuilder.Application.FlashCards.Commands.UpdateFlashCard
             entity.FlashCardPicture = request.Picture;
             entity.TypeCardId = (int)request.TypeCard;
             entity.CategoryId = request.Category;
+            entity.Meaning = request.Meaning;
 
             await _context.SaveChangesAsync(cancellationToken);
 

@@ -30,7 +30,7 @@ namespace VocabularyBuilder.Application.FlashCards.Commands.AddFlashCard
                 FlashCardPicture = request.Picture,
                 TypeCardId = (int)request.TypeCard,
                 FlashCardDate = DateTime.Now,
-                MeaningId = await NewMeaning(request.Meaning,cancellationToken),
+                Meaning = request.Meaning,
                 UserId = request.UserId
 
             };
@@ -40,16 +40,6 @@ namespace VocabularyBuilder.Application.FlashCards.Commands.AddFlashCard
              await _context.SaveChangesAsync(cancellationToken);
 
              return entity.FlashCardId;
-        }
-
-        private async Task<int> NewMeaning(string requestMeaning, CancellationToken cancellationToken)
-        {
-            Meaning newMeaning= new Meaning(){Description = requestMeaning};
-
-            _context.Meanings.Add(newMeaning);
-            await _context.SaveChangesAsync(cancellationToken);
-
-            return newMeaning.MeaningId;
         }
 
     }

@@ -36,7 +36,6 @@ namespace VocabularyBuilder.API.Controllers
         }
 
         [HttpGet("GetFlashCards/{typeCard:int}")]
-        [AllowAnonymous]
         public async Task<ActionResult<FlashCardsListVm>> GetFlashCards(TypeCardStatus typeCard)
         {
             var vm = await _mediator.Send(new GetFlashCardsQuery() {TypeCard = typeCard,UserId=HttpContext.GetUserId()});
@@ -47,8 +46,8 @@ namespace VocabularyBuilder.API.Controllers
         public async Task<ActionResult<int>> Create([FromBody] AddFlashCardCommand command)
         {
             command.UserId = HttpContext.GetUserId();
-            var movieId = await _mediator.Send(command);
-            return Ok(movieId);
+            var flashCardId = await _mediator.Send(command);
+            return Ok(flashCardId);
         }
 
         [HttpPut("UpdateFlashCard")]

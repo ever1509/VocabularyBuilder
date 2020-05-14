@@ -12,7 +12,6 @@ namespace VocabularyBuilder.Application.FlashCards.Queries.GetFlashCards
         public string MainWord { get; set; }
         public string Example { get; set; }
         public int CategoryId { get; set; }
-        public int MeaningId { get; set; }
         public string Meaning { get; set; }
         public TypeCardStatus TypeCard { get; set; }
 

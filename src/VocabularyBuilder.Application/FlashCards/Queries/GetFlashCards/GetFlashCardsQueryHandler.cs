@@ -26,16 +26,26 @@ namespace VocabularyBuilder.Application.FlashCards.Queries.GetFlashCards
         {
             if (_context.FlashCards.Any())
             {
-                var flashcards = await _context.FlashCards
-                    .Include(e => e.Meaning)
-                    .Where(f => f.TypeCardId == (int)request.TypeCard)
-                    .ProjectTo<FlashCardDto>(_mapper.ConfigurationProvider)
-                    .ToListAsync(cancellationToken);
-
-                return new FlashCardsListVm()
+                try
                 {
-                    FlashCards = flashcards
-                };
+                    var flashcards = await _context.FlashCards
+                        .Where(f => f.TypeCardId == (int)request.TypeCard)
+                        .ProjectTo<FlashCardDto>(_mapper.ConfigurationProvider)
+                        .ToListAsync(cancellationToken);
+                   
+                    return new FlashCardsListVm()
+                    {
+                        FlashCards = flashcards
+                    };
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
+               
+
+             
             }
 
             return new FlashCardsListVm();

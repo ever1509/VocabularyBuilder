@@ -6,7 +6,6 @@ namespace VocabularyBuilder.Application.FlashCards.Commands.AddFlashCard
 {
     public class AddFlashCardCommand : IRequest<int>
     {
-        public int Id { get; set; }
         public string MainWord { get; set; }
         public string Example { get; set; }
         public int Category { get; set; }

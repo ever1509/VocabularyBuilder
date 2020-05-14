@@ -12,7 +12,6 @@ namespace VocabularyBuilder.Application.FlashCards.Commands.UpdateFlashCard
         public int Category { get; set; }
         public TypeCardStatus TypeCard { get; set; }
         public string Meaning { get; set; }
-        public int MeaningId { get; set; }
         public byte[] Picture { get; set; }
         public string UserId { get; set; }
     }

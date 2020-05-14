@@ -12,7 +12,6 @@ namespace VocabularyBuilder.Application.FlashCards.Commands.UpdateFlashCard
             RuleFor(f => f.MainWord).NotEmpty().MaximumLength(50);
             RuleFor(f => f.Example).MaximumLength(1000);
             RuleFor(f => f.Meaning).NotEmpty();
-            RuleFor(f => f.MeaningId).NotEmpty();
         }
     }
 }
