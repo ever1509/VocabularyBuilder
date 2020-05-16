@@ -11,6 +11,6 @@ namespace VocabularyBuilder.Infrastructure.Identity
         [EmailAddress]
         public string Email { get; set; }
         public string Password { get; set; }
-        public UserRoles Role { get; set; }
+        public UserRoles? Role { get; set; }
     }
 }

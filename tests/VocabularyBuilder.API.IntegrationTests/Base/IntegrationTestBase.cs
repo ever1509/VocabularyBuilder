@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 using VocabularyBuilder.Application.Common.Enums;
 using VocabularyBuilder.Application.FlashCards.Commands.AddFlashCard;
 using VocabularyBuilder.Infrastructure.Identity;
-using VocabularyBuilder.Infrastructure.Identity.Enums;
 
 namespace VocabularyBuilder.API.IntegrationTests.Base
 {
@@ -21,7 +16,7 @@ namespace VocabularyBuilder.API.IntegrationTests.Base
             TestClient = fixture.CreateClient();
         }
 
-        protected async Task LoginAuthenticateAsync()
+        protected async Task AuthenticateAsync()
         {
             TestClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", await GetJwtAsync());
         }
@@ -36,10 +31,11 @@ namespace VocabularyBuilder.API.IntegrationTests.Base
         }
         private async Task<string> GetJwtAsync()
         {
-            var response = await TestClient.PostAsJsonAsync("api/Identity/Login", new UserLoginRequest()
+            var response = await TestClient.PostAsJsonAsync("api/Identity/Register", new UserRegistrationRequest()
             {
-                Email = TestUsersSettings.AdminEmail,
-                Password = testUserList().FirstOrDefault(u=>u.Email==TestUsersSettings.AdminEmail)?.PasswordHash 
+                Email = TestUsersSettings.UserEmail,
+                Password = TestUsersSettings.Password,
+                Role = null
             });
 
             var registrationResponse = await response.Content.ReadAsAsync<AuthSuccessResponse>();

@@ -6,6 +6,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using VocabularyBuilder.Data;
@@ -126,7 +127,7 @@ namespace VocabularyBuilder.Infrastructure.Identity
             return await GenerateAuthenticationResultForUserAsync(user);
         }
 
-        public async Task<AuthenticationResult> RegisterAsync(string email, string password,UserRoles role)
+        public async Task<AuthenticationResult> RegisterAsync(string email, string password,UserRoles? role=null)
         {
             var existingUser = await _userManager.FindByEmailAsync(email);
 
@@ -156,7 +157,8 @@ namespace VocabularyBuilder.Infrastructure.Identity
                 };
             }
 
-            await AssignRoleToUser(role,newUser);
+            if(role.HasValue)
+                await AssignRoleToUser(role.Value,newUser);
             
 
             //await _userManager.AddClaimAsync(newUser, new Claim("User.view", "true"));
