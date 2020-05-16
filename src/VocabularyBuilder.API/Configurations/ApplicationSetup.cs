@@ -12,6 +12,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using VocabularyBuilder.Application.Categories.Commands.AddCategoryCommand;
+using VocabularyBuilder.Application.Categories.Commands.DeleteCategoryCommand;
+using VocabularyBuilder.Application.Categories.Commands.UpdateCategoryCommand;
 using VocabularyBuilder.Application.Categories.Queries.GetCategories;
 using VocabularyBuilder.Application.Common.Behaviours;
 using VocabularyBuilder.Application.Common.Mappings;
@@ -46,13 +49,10 @@ namespace VocabularyBuilder.API.Configurations
             services.AddMediatR(typeof(DeleteFlashCardCommand).GetTypeInfo().Assembly);
             services.AddMediatR(typeof(GetFlashCardsQuery).GetTypeInfo().Assembly);
             services.AddMediatR(typeof(GetCategoriesQuery).GetTypeInfo().Assembly);
-
-
+            services.AddMediatR(typeof(AddCategoryCommand).GetTypeInfo().Assembly);
+            services.AddMediatR(typeof(UpdateCategoryCommand).GetTypeInfo().Assembly);
+            services.AddMediatR(typeof(DeleteCategoryCommand).GetTypeInfo().Assembly);
             
-
-
-
-
             return services;
         }
     }

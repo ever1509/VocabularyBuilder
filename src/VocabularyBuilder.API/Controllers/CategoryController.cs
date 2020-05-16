@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VocabularyBuilder.Application.Categories.Commands.AddCategoryCommand;
+using VocabularyBuilder.Application.Categories.Commands.DeleteCategoryCommand;
+using VocabularyBuilder.Application.Categories.Commands.UpdateCategoryCommand;
 using VocabularyBuilder.Application.Categories.Queries.GetCategories;
 
 namespace VocabularyBuilder.API.Controllers
@@ -28,6 +27,22 @@ namespace VocabularyBuilder.API.Controllers
         {
             var dto = await _mediator.Send(command);
             return Ok(dto);
+        }
+        [HttpPut("UpdateCategory")]
+        [Authorize(Roles = "Admin")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public async Task<IActionResult> Update([FromBody] UpdateCategoryCommand command)
+        {
+             await _mediator.Send(command);
+            return NoContent();
+        }
+        [HttpDelete("DeleteCategory")]
+        [Authorize(Roles = "Admin")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public async Task<IActionResult> Delete([FromBody] DeleteCategoryCommand command)
+        {
+             await _mediator.Send(command);
+            return NoContent();
         }
     }
 }

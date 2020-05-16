@@ -47,6 +47,7 @@ namespace VocabularyBuilder.API.Controllers
         }
 
         [HttpPut("UpdateFlashCard")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> Update([FromBody] UpdateFlashCardCommand command)
         {
             command.UserId = HttpContext.GetUserId();

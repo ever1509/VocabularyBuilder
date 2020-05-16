@@ -7,6 +7,7 @@ using AutoMapper;
 using MediatR;
 using VocabularyBuilder.Application.Categories.Queries.GetCategories;
 using VocabularyBuilder.Data;
+using VocabularyBuilder.Domain.Entities;
 
 namespace VocabularyBuilder.Application.Categories.Commands.AddCategoryCommand
 {
@@ -20,9 +21,18 @@ namespace VocabularyBuilder.Application.Categories.Commands.AddCategoryCommand
             _context = context;
             _mapper = mapper;
         }
-        public Task<CategoryDto> Handle(AddCategoryCommand request, CancellationToken cancellationToken)
+        public async Task<CategoryDto> Handle(AddCategoryCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var entity = new Category()
+            {
+                Description = request.Description
+            };
+
+            _context.Categories.Add(entity);
+
+            await _context.SaveChangesAsync(cancellationToken);
+
+            return _mapper.Map<CategoryDto>(entity);
         }
     }
 }
