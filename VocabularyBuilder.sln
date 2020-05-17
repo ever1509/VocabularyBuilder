@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VocabularyBuilder.API", "sr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VocabularyBuilder.Infrastructure", "src\VocabularyBuilder.Infrastructure\VocabularyBuilder.Infrastructure.csproj", "{91B2ACE1-3C86-40BA-93CA-109EAC0F4068}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VocabularyBuilder.API.IntegrationTests", "tests\VocabularyBuilder.API.IntegrationTests\VocabularyBuilder.API.IntegrationTests.csproj", "{4CB0EB0E-5EC9-4BDA-91AF-6949AA248C66}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VocabularyBuilder.API.IntegrationTests", "tests\VocabularyBuilder.API.IntegrationTests\VocabularyBuilder.API.IntegrationTests.csproj", "{4CB0EB0E-5EC9-4BDA-91AF-6949AA248C66}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VocabularyBuilder.UnitTests", "tests\VocabularyBuilder.UnitTests\VocabularyBuilder.UnitTests.csproj", "{14293126-A71D-4AD3-9244-AD4FC7020D32}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{4CB0EB0E-5EC9-4BDA-91AF-6949AA248C66}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4CB0EB0E-5EC9-4BDA-91AF-6949AA248C66}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4CB0EB0E-5EC9-4BDA-91AF-6949AA248C66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14293126-A71D-4AD3-9244-AD4FC7020D32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14293126-A71D-4AD3-9244-AD4FC7020D32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14293126-A71D-4AD3-9244-AD4FC7020D32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14293126-A71D-4AD3-9244-AD4FC7020D32}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
