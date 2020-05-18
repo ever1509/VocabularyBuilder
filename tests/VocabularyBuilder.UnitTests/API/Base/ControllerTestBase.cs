@@ -1,44 +1,139 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using FakeItEasy;
 using MediatR;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 using VocabularyBuilder.API.Controllers;
+using VocabularyBuilder.Application.Categories.Commands.AddCategoryCommand;
+using VocabularyBuilder.Application.Categories.Commands.DeleteCategoryCommand;
+using VocabularyBuilder.Application.Categories.Commands.UpdateCategoryCommand;
+using VocabularyBuilder.Application.Categories.Queries.GetCategories;
+using VocabularyBuilder.Application.Common.Enums;
+using VocabularyBuilder.Application.FlashCards.Commands.AddFlashCard;
+using VocabularyBuilder.Application.FlashCards.Commands.DeleteFlashCard;
+using VocabularyBuilder.Application.FlashCards.Commands.UpdateFlashCard;
+using VocabularyBuilder.Application.FlashCards.Queries.GetFlashCards;
+using VocabularyBuilder.Domain.Entities;
 
 namespace VocabularyBuilder.UnitTests.API.Base
 {
     public class ControllerTestBase<T> where T:class
     {
-        private readonly IMediator _mediatorFake;
-        private readonly ILogger<T> _loggerFake;
+        public readonly IMediator MediatorFake;
+        public readonly ILogger<T> LoggerFake;
         public ControllerTestBase()
         {
-            _mediatorFake = A.Fake<IMediator>();
+            MediatorFake = A.Fake<IMediator>();
 
-            ConfigureMediator(_mediatorFake);
+            ConfigureMediator(MediatorFake);
 
-            _loggerFake = A.Fake<ILogger<T>>();
+            LoggerFake = A.Fake<ILogger<T>>();
 
         }
         private void ConfigureMediator(IMediator mediatorFake)
         {
-            //TODO: Configure different mock for commands
+            A.CallTo(() => mediatorFake.Send(A<AddFlashCardCommand>._, A<CancellationToken>._))
+                .Returns(AddFlashCardCommandFake());
+            A.CallTo(() => mediatorFake.Send(A<UpdateFlashCardCommand>._, A<CancellationToken>._))
+                .Returns(true);
+            A.CallTo(() => mediatorFake.Send(A<DeleteFlashCardCommand>._, A<CancellationToken>._))
+                .Returns(true);
+            A.CallTo(() => mediatorFake.Send(A<AddCategoryCommand>._, A<CancellationToken>._))
+                .Returns(AddCategoryCommandFake());
 
-            //A.CallTo(() => mediatorFake.Send(A<AddMovieLikeCommand>._, A<CancellationToken>._))
-            //    .Returns(AddMovieLikeFake());
-            //A.CallTo(() => mediatorFake.Send(A<CreateMovieCommand>._, A<CancellationToken>._))
-            //    .Returns(CreateUpdateMovie());
-            //A.CallTo(() => mediatorFake.Send(A<DeleteMovieCommand>._, A<CancellationToken>._));
-            //A.CallTo(() => mediatorFake.Send(A<UpdateMovieCommand>._, A<CancellationToken>._));
+            A.CallTo(() => mediatorFake.Send(A<UpdateCategoryCommand>._, A<CancellationToken>._)).Returns(Unit.Value);
+            A.CallTo(() => mediatorFake.Send(A<DeleteCategoryCommand>._, A<CancellationToken>._)).Returns(Unit.Value);
 
-            //A.CallTo(() => mediatorFake.Send(A<GetAllMoviesListQuery>._, A<CancellationToken>._))
-            //    .Returns(GetMoviesListQueryFake());
-            //A.CallTo(() => mediatorFake.Send(A<GetMovieDetailQuery>._, A<CancellationToken>._))
-            //    .Returns(GetMovieDetailFake());
-            //A.CallTo(() => mediatorFake.Send(A<RentalMovieCommand>._, A<CancellationToken>._));
-            //A.CallTo(() => mediatorFake.Send(A<ReturnMovieCommand>._, A<CancellationToken>._))
-            //    .Returns(ReturnFakeMovie());
+            A.CallTo(() => mediatorFake.Send(A<GetFlashCardsQuery>._, A<CancellationToken>._))
+                .Returns(GeFlashCardsFake());
+            A.CallTo(() => mediatorFake.Send(A<GetCategoriesQuery>._, A<CancellationToken>._))
+                .Returns(GetCategoriesQueryFake());
+        }
+
+        private Task<CategoriesListVm> GetCategoriesQueryFake()
+        {
+            return Task.Run(() => new CategoriesListVm()
+            {
+                Categories = new List<CategoryDto>()
+                {
+                    new CategoryDto(){Id=1,Description = "Food"},
+                    new CategoryDto(){Id = 2,Description = "Animals"}
+                }
+            });
+        }
+
+        private Task<FlashCardsListVm> GeFlashCardsFake()
+        {
+            return Task.Run(() =>
+            {
+                return new FlashCardsListVm()
+                {
+                    FlashCards = new List<FlashCardDto>()
+                    {
+                        new FlashCardDto()
+                        {
+                            MainWord = "HeadSets",
+                            Id = 1,
+                            CategoryId = 1,
+                            TypeCard = TypeCardStatus.Weekly,
+                            Meaning = "Device use with ears",
+                            Example = "This headsets are amazing"
+                        },
+                        new FlashCardDto()
+                        {
+                            MainWord = "Computer",
+                            Id = 2,
+                            CategoryId = 1,
+                            TypeCard = TypeCardStatus.Weekly,
+                            Meaning = "Device use at work",
+                            Example = "The computer is better than mine"
+                        }
+                        ,
+                        new FlashCardDto()
+                        {
+                            MainWord = "Cellphone",
+                            Id = 3,
+                            CategoryId = 1,
+                            TypeCard = TypeCardStatus.Weekly,
+                            Meaning = "Device use to talk with someone",
+                            Example = "your celphone is big"
+                        }
+                    }
+                };
+            });
+        }
+
+        private Task<CategoryDto> AddCategoryCommandFake()
+        {
+            return Task.Run(() => new CategoryDto()
+            {
+                Description = "Food",
+                Id = 1
+            });
+        }
+
+        private Task<int> AddFlashCardCommandFake()
+        {
+            return Task.Run(() =>
+            {
+                var fc= new FlashCard()
+                {
+                    MainWord = "HeadSets",
+                    TypeCardId = 1,
+                    CategoryId = 1,
+                    FlashCardId = 1,
+                    Example = "Device headset test",
+                    FlashCardPicture = new byte[] {2, 4, 2, 4},
+                    FlashCardDate = DateTime.UtcNow,
+                    Meaning = "Device use in the ears"
+
+                };
+                return fc.FlashCardId;
+            });
         }
     }
 }
