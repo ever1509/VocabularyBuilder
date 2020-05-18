@@ -14,6 +14,7 @@ namespace VocabularyBuilder.Application.FlashCards.Queries.GetFlashCards
         public int CategoryId { get; set; }
         public string Meaning { get; set; }
         public TypeCardStatus TypeCard { get; set; }
+        public byte[] Picture { get; set; }
 
 
     }

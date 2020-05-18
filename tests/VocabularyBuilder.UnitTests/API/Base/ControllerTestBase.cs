@@ -18,6 +18,7 @@ using VocabularyBuilder.Application.FlashCards.Commands.DeleteFlashCard;
 using VocabularyBuilder.Application.FlashCards.Commands.UpdateFlashCard;
 using VocabularyBuilder.Application.FlashCards.Queries.GetFlashCards;
 using VocabularyBuilder.Domain.Entities;
+using VocabularyBuilder.Infrastructure.Identity;
 
 namespace VocabularyBuilder.UnitTests.API.Base
 {
@@ -25,6 +26,7 @@ namespace VocabularyBuilder.UnitTests.API.Base
     {
         public readonly IMediator MediatorFake;
         public readonly ILogger<T> LoggerFake;
+        public readonly IIdentityService IdentityServiceFake;
         public ControllerTestBase()
         {
             MediatorFake = A.Fake<IMediator>();
@@ -33,7 +35,38 @@ namespace VocabularyBuilder.UnitTests.API.Base
 
             LoggerFake = A.Fake<ILogger<T>>();
 
+            IdentityServiceFake = A.Fake<IIdentityService>();
+
+            ConfigureIdentityServiceFake(IdentityServiceFake);
+
         }
+
+        private void ConfigureIdentityServiceFake(IIdentityService identityServiceFake)
+        {
+            A.CallTo(() => identityServiceFake.LoginAsync(A<string>._, A<string>._)).Returns(GenerateAuthenticationResult());
+
+            A.CallTo(() => identityServiceFake.RegisterAsync(A<string>._, A<string>._, null))
+                .Returns(GenerateAuthenticationResult());
+
+            A.CallTo(() => identityServiceFake.RefreshTokenAsync(A<string>._, A<string>._))
+                .Returns(GenerateAuthenticationResult());
+
+        }
+
+        public Task<AuthenticationResult> GenerateAuthenticationResult()
+        {
+            return Task.Run(() =>
+            {
+                return new AuthenticationResult()
+                {
+                    Token = "0fe563fe-94e1-4e38-bd84-0d527b0e9e32",
+                    Errors = null,
+                    RefreshToken = "0fe563fe-94e1-4e38-bd84-0d527b0e9e32",
+                    Success = true
+                };
+            });
+        }
+
         private void ConfigureMediator(IMediator mediatorFake)
         {
             A.CallTo(() => mediatorFake.Send(A<AddFlashCardCommand>._, A<CancellationToken>._))
@@ -54,7 +87,7 @@ namespace VocabularyBuilder.UnitTests.API.Base
                 .Returns(GetCategoriesQueryFake());
         }
 
-        private Task<CategoriesListVm> GetCategoriesQueryFake()
+        public Task<CategoriesListVm> GetCategoriesQueryFake()
         {
             return Task.Run(() => new CategoriesListVm()
             {
@@ -66,7 +99,7 @@ namespace VocabularyBuilder.UnitTests.API.Base
             });
         }
 
-        private Task<FlashCardsListVm> GeFlashCardsFake()
+        public Task<FlashCardsListVm> GeFlashCardsFake()
         {
             return Task.Run(() =>
             {
@@ -81,7 +114,8 @@ namespace VocabularyBuilder.UnitTests.API.Base
                             CategoryId = 1,
                             TypeCard = TypeCardStatus.Weekly,
                             Meaning = "Device use with ears",
-                            Example = "This headsets are amazing"
+                            Example = "This headsets are amazing",
+                            Picture = new byte[]{1,2,3,4}
                         },
                         new FlashCardDto()
                         {
@@ -90,7 +124,8 @@ namespace VocabularyBuilder.UnitTests.API.Base
                             CategoryId = 1,
                             TypeCard = TypeCardStatus.Weekly,
                             Meaning = "Device use at work",
-                            Example = "The computer is better than mine"
+                            Example = "The computer is better than mine",
+                            Picture = new byte[]{5,6,7,8}
                         }
                         ,
                         new FlashCardDto()

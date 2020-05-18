@@ -25,7 +25,8 @@ namespace VocabularyBuilder.Application.Common.Mappings
                 .ForMember(d=>d.Meaning,opt=>opt.MapFrom(e=>e.Meaning))
                 .ForMember(d=>d.MainWord,opt=>opt.MapFrom(e=>e.MainWord))
                 .ForMember(d=>d.Id,opt=>opt.MapFrom(e=>e.FlashCardId))
-                .ForMember(d=>d.Example,opt=>opt.MapFrom(e=>e.Example));
+                .ForMember(d=>d.Example,opt=>opt.MapFrom(e=>e.Example))
+                .ForMember(d=>d.Picture,opt=>opt.MapFrom(e=>e.FlashCardPicture));
 
 
 
