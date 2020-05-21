@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Domain.Entities;
 using FakeItEasy;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -17,7 +18,6 @@ using VocabularyBuilder.Application.FlashCards.Commands.AddFlashCard;
 using VocabularyBuilder.Application.FlashCards.Commands.DeleteFlashCard;
 using VocabularyBuilder.Application.FlashCards.Commands.UpdateFlashCard;
 using VocabularyBuilder.Application.FlashCards.Queries.GetFlashCards;
-using VocabularyBuilder.Domain.Entities;
 using VocabularyBuilder.Infrastructure.Identity;
 
 namespace VocabularyBuilder.UnitTests.API.Base

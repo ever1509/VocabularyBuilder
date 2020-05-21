@@ -4,9 +4,9 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Domain.Entities;
 using MediatR;
 using VocabularyBuilder.Data;
-using VocabularyBuilder.Domain.Entities;
 
 namespace VocabularyBuilder.Application.Categories.Commands.DeleteCategoryCommand
 {

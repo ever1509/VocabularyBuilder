@@ -8,9 +8,9 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using VocabularyBuilder.Data;
-using VocabularyBuilder.Domain.Entities;
 using VocabularyBuilder.Infrastructure.Identity.Enums;
 
 namespace VocabularyBuilder.Infrastructure.Identity

@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\VocabularyBuilder.Domain\VocabularyBuilder.Domain.csproj" />
+    <ProjectReference Include="..\VocabularyBuilder.Domain\Domain.csproj" />
   </ItemGroup>
 
 </Project>

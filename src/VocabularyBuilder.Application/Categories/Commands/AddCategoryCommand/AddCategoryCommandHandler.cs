@@ -4,10 +4,10 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
+using Domain.Entities;
 using MediatR;
 using VocabularyBuilder.Application.Categories.Queries.GetCategories;
 using VocabularyBuilder.Data;
-using VocabularyBuilder.Domain.Entities;
 
 namespace VocabularyBuilder.Application.Categories.Commands.AddCategoryCommand
 {

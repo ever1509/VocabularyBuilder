@@ -13,7 +13,6 @@ using VocabularyBuilder.Application.FlashCards.Commands.AddFlashCard;
 using VocabularyBuilder.Application.FlashCards.Commands.DeleteFlashCard;
 using VocabularyBuilder.Application.FlashCards.Commands.UpdateFlashCard;
 using VocabularyBuilder.Application.FlashCards.Queries.GetFlashCards;
-using VocabularyBuilder.Domain.Entities;
 using VocabularyBuilder.UnitTests.API.Base;
 using Xunit;
 

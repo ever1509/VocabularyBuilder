@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 using AutoMapper;
+using Domain.Entities;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using VocabularyBuilder.Application.Categories.Queries.GetCategories;
 using VocabularyBuilder.Application.Common.Enums;
 using VocabularyBuilder.Application.FlashCards.Queries.GetFlashCards;
 using VocabularyBuilder.Data.Migrations;
-using VocabularyBuilder.Domain.Entities;
 
 namespace VocabularyBuilder.Application.Common.Mappings
 {

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VocabularyBuilder.Domain", "src\VocabularyBuilder.Domain\VocabularyBuilder.Domain.csproj", "{D0911F85-0D35-4079-83AC-8DB9D38D536C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "src\VocabularyBuilder.Domain\Domain.csproj", "{D0911F85-0D35-4079-83AC-8DB9D38D536C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VocabularyBuilder.Data", "src\VocabularyBuilder.Data\VocabularyBuilder.Data.csproj", "{F14475A0-1D61-4847-A24E-EF4354DCF3DD}"
 EndProject
@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VocabularyBuilder.Infrastru
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VocabularyBuilder.API.IntegrationTests", "tests\VocabularyBuilder.API.IntegrationTests\VocabularyBuilder.API.IntegrationTests.csproj", "{4CB0EB0E-5EC9-4BDA-91AF-6949AA248C66}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VocabularyBuilder.UnitTests", "tests\VocabularyBuilder.UnitTests\VocabularyBuilder.UnitTests.csproj", "{14293126-A71D-4AD3-9244-AD4FC7020D32}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VocabularyBuilder.UnitTests", "tests\VocabularyBuilder.UnitTests\VocabularyBuilder.UnitTests.csproj", "{14293126-A71D-4AD3-9244-AD4FC7020D32}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

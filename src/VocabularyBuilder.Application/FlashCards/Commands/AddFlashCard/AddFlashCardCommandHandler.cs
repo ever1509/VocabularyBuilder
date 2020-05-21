@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Domain.Entities;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using VocabularyBuilder.Data;
-using VocabularyBuilder.Domain.Entities;
 
 namespace VocabularyBuilder.Application.FlashCards.Commands.AddFlashCard
 {

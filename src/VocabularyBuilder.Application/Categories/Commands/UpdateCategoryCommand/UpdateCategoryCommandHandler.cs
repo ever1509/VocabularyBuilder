@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using VocabularyBuilder.Data;
-using VocabularyBuilder.Domain.Entities;
 
 namespace VocabularyBuilder.Application.Categories.Commands.UpdateCategoryCommand
 {
