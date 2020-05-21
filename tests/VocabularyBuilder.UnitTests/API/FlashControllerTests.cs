@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.Threading.Tasks;
+using Application.Categories.Queries.GetCategories;
+using Application.FlashCards.Commands.AddFlashCard;
+using Application.FlashCards.Commands.UpdateFlashCard;
+using Application.FlashCards.Queries.GetFlashCards;
+using Domain.Enums;
 using FluentAssertions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VocabularyBuilder.API.Controllers;
-using VocabularyBuilder.Application.Categories.Queries.GetCategories;
-using VocabularyBuilder.Application.Common.Enums;
-using VocabularyBuilder.Application.FlashCards.Commands.AddFlashCard;
-using VocabularyBuilder.Application.FlashCards.Commands.DeleteFlashCard;
-using VocabularyBuilder.Application.FlashCards.Commands.UpdateFlashCard;
-using VocabularyBuilder.Application.FlashCards.Queries.GetFlashCards;
 using VocabularyBuilder.UnitTests.API.Base;
 using Xunit;
 

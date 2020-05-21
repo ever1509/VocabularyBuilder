@@ -1,9 +1,10 @@
 ﻿using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using VocabularyBuilder.Application.Common.Enums;
-using VocabularyBuilder.Application.FlashCards.Commands.AddFlashCard;
-using VocabularyBuilder.Infrastructure.Identity;
+using Application.Common.Models.Requests;
+using Application.Common.Models.Responses;
+using Application.FlashCards.Commands.AddFlashCard;
+using Domain.Enums;
 
 namespace VocabularyBuilder.API.IntegrationTests.Base
 {

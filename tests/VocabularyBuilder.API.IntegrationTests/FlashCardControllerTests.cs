@@ -2,10 +2,10 @@
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Application.Categories.Queries.GetCategories;
+using Application.FlashCards.Queries.GetFlashCards;
 using FluentAssertions;
 using VocabularyBuilder.API.IntegrationTests.Base;
-using VocabularyBuilder.Application.Categories.Queries.GetCategories;
-using VocabularyBuilder.Application.FlashCards.Queries.GetFlashCards;
 using Xunit;
 
 namespace VocabularyBuilder.API.IntegrationTests

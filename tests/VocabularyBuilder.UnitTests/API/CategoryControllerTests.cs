@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Application.Categories.Commands.AddCategoryCommand;
+using Application.Categories.Commands.DeleteCategoryCommand;
+using Application.Categories.Commands.UpdateCategoryCommand;
+using Application.Categories.Queries.GetCategories;
 using FluentAssertions;
-using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VocabularyBuilder.API.Controllers;
-using VocabularyBuilder.Application.Categories.Commands.AddCategoryCommand;
-using VocabularyBuilder.Application.Categories.Commands.DeleteCategoryCommand;
-using VocabularyBuilder.Application.Categories.Commands.UpdateCategoryCommand;
-using VocabularyBuilder.Application.Categories.Queries.GetCategories;
 using VocabularyBuilder.UnitTests.API.Base;
 using Xunit;
 

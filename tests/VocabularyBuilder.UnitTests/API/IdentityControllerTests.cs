@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Application.Common.Models.Requests;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using VocabularyBuilder.API.Controllers;
-using VocabularyBuilder.Infrastructure.Identity;
 using VocabularyBuilder.UnitTests.API.Base;
 using Xunit;
 

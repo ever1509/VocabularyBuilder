@@ -3,19 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "src\VocabularyBuilder.Domain\Domain.csproj", "{D0911F85-0D35-4079-83AC-8DB9D38D536C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "src\Domain\Domain.csproj", "{D0911F85-0D35-4079-83AC-8DB9D38D536C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VocabularyBuilder.Data", "src\VocabularyBuilder.Data\VocabularyBuilder.Data.csproj", "{F14475A0-1D61-4847-A24E-EF4354DCF3DD}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VocabularyBuilder.Application", "src\VocabularyBuilder.Application\VocabularyBuilder.Application.csproj", "{210BB358-1109-4F87-BDAE-9FBD27ABB8D0}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VocabularyBuilder.API", "src\VocabularyBuilder.API\VocabularyBuilder.API.csproj", "{F9111CBB-9351-47BF-A348-7114700C1B8B}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VocabularyBuilder.Infrastructure", "src\VocabularyBuilder.Infrastructure\VocabularyBuilder.Infrastructure.csproj", "{91B2ACE1-3C86-40BA-93CA-109EAC0F4068}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Presentation.API", "src\Presentation.API\Presentation.API.csproj", "{F9111CBB-9351-47BF-A348-7114700C1B8B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VocabularyBuilder.API.IntegrationTests", "tests\VocabularyBuilder.API.IntegrationTests\VocabularyBuilder.API.IntegrationTests.csproj", "{4CB0EB0E-5EC9-4BDA-91AF-6949AA248C66}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VocabularyBuilder.UnitTests", "tests\VocabularyBuilder.UnitTests\VocabularyBuilder.UnitTests.csproj", "{14293126-A71D-4AD3-9244-AD4FC7020D32}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "src\Application\Application.csproj", "{8B0D82A5-A10E-4BC7-81DB-77A44BE6E365}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "src\Infrastructure\Infrastructure.csproj", "{55803664-EF03-4AC9-A26B-B36B932A2492}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,22 +25,10 @@ Global
 		{D0911F85-0D35-4079-83AC-8DB9D38D536C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D0911F85-0D35-4079-83AC-8DB9D38D536C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D0911F85-0D35-4079-83AC-8DB9D38D536C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F14475A0-1D61-4847-A24E-EF4354DCF3DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F14475A0-1D61-4847-A24E-EF4354DCF3DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F14475A0-1D61-4847-A24E-EF4354DCF3DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F14475A0-1D61-4847-A24E-EF4354DCF3DD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{210BB358-1109-4F87-BDAE-9FBD27ABB8D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{210BB358-1109-4F87-BDAE-9FBD27ABB8D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{210BB358-1109-4F87-BDAE-9FBD27ABB8D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{210BB358-1109-4F87-BDAE-9FBD27ABB8D0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F9111CBB-9351-47BF-A348-7114700C1B8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F9111CBB-9351-47BF-A348-7114700C1B8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9111CBB-9351-47BF-A348-7114700C1B8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9111CBB-9351-47BF-A348-7114700C1B8B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{91B2ACE1-3C86-40BA-93CA-109EAC0F4068}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{91B2ACE1-3C86-40BA-93CA-109EAC0F4068}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{91B2ACE1-3C86-40BA-93CA-109EAC0F4068}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{91B2ACE1-3C86-40BA-93CA-109EAC0F4068}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4CB0EB0E-5EC9-4BDA-91AF-6949AA248C66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4CB0EB0E-5EC9-4BDA-91AF-6949AA248C66}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4CB0EB0E-5EC9-4BDA-91AF-6949AA248C66}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -51,6 +37,14 @@ Global
 		{14293126-A71D-4AD3-9244-AD4FC7020D32}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14293126-A71D-4AD3-9244-AD4FC7020D32}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14293126-A71D-4AD3-9244-AD4FC7020D32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B0D82A5-A10E-4BC7-81DB-77A44BE6E365}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B0D82A5-A10E-4BC7-81DB-77A44BE6E365}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B0D82A5-A10E-4BC7-81DB-77A44BE6E365}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B0D82A5-A10E-4BC7-81DB-77A44BE6E365}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55803664-EF03-4AC9-A26B-B36B932A2492}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55803664-EF03-4AC9-A26B-B36B932A2492}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55803664-EF03-4AC9-A26B-B36B932A2492}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55803664-EF03-4AC9-A26B-B36B932A2492}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

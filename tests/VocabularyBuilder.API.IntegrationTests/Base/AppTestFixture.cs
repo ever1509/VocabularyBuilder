@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Linq;
+using Infrastructure.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using VocabularyBuilder.Data;
-using VocabularyBuilder.Infrastructure.Identity;
 
 namespace VocabularyBuilder.API.IntegrationTests.Base
 {
@@ -16,22 +15,18 @@ namespace VocabularyBuilder.API.IntegrationTests.Base
             builder.ConfigureServices(services =>
             {
                 var descriptorContextVb = services.SingleOrDefault(d =>
-                    d.ServiceType == typeof(DbContextOptions<VocabularyBuilderContext>));
+                    d.ServiceType == typeof(DbContextOptions<VocabularyBuilderDbContext>));
 
-                var descriptorContextAc =
-                    services.SingleOrDefault(d => d.ServiceType == typeof(DbContextOptions<ApplicationDbContext>));
-
-                if (descriptorContextVb != null && descriptorContextAc != null)
+                if (descriptorContextVb != null)
                 {
                     services.Remove(descriptorContextVb);
-                    services.Remove(descriptorContextAc);
                 }
 
                 var serviceProvider = new ServiceCollection()
                     .AddEntityFrameworkInMemoryDatabase()
                     .BuildServiceProvider();
 
-                services.AddDbContext<VocabularyBuilderContext>(options =>
+                services.AddDbContext<VocabularyBuilderDbContext>(options =>
                 {
                     options.UseInMemoryDatabase("InMemoryVocabularyBuilderTest");
                     options.UseInternalServiceProvider(serviceProvider);
@@ -41,7 +36,7 @@ namespace VocabularyBuilder.API.IntegrationTests.Base
 
                 using (var scope = sp.CreateScope())
                 {
-                    using (var appContext = scope.ServiceProvider.GetRequiredService<VocabularyBuilderContext>())
+                    using (var appContext = scope.ServiceProvider.GetRequiredService<VocabularyBuilderDbContext>())
                     {
                         try
                         {
@@ -52,31 +47,6 @@ namespace VocabularyBuilder.API.IntegrationTests.Base
                             Console.WriteLine(e);
                             throw;
                         }
-                    }
-                }
-
-                services.AddDbContext<ApplicationDbContext>(options =>
-                {
-                    options.UseInMemoryDatabase("InMemoryApplicationDbContextTest");
-                    options.UseInternalServiceProvider(serviceProvider);
-                });
-
-                var spApplicationDbContext = services.BuildServiceProvider();
-
-                using (var scope = spApplicationDbContext.CreateScope())
-                {
-                    using (var appContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>())
-                    {
-                        try
-                        {
-                            appContext.Database.EnsureCreated();
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine(e);
-                            throw;
-                        }
-
                     }
                 }
             });

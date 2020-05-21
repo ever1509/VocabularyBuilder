@@ -3,22 +3,21 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Application.Categories.Commands.AddCategoryCommand;
+using Application.Categories.Commands.DeleteCategoryCommand;
+using Application.Categories.Commands.UpdateCategoryCommand;
+using Application.Categories.Queries.GetCategories;
+using Application.Common.Interfaces;
+using Application.Common.Models;
+using Application.FlashCards.Commands.AddFlashCard;
+using Application.FlashCards.Commands.DeleteFlashCard;
+using Application.FlashCards.Commands.UpdateFlashCard;
+using Application.FlashCards.Queries.GetFlashCards;
 using Domain.Entities;
+using Domain.Enums;
 using FakeItEasy;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
-using VocabularyBuilder.API.Controllers;
-using VocabularyBuilder.Application.Categories.Commands.AddCategoryCommand;
-using VocabularyBuilder.Application.Categories.Commands.DeleteCategoryCommand;
-using VocabularyBuilder.Application.Categories.Commands.UpdateCategoryCommand;
-using VocabularyBuilder.Application.Categories.Queries.GetCategories;
-using VocabularyBuilder.Application.Common.Enums;
-using VocabularyBuilder.Application.FlashCards.Commands.AddFlashCard;
-using VocabularyBuilder.Application.FlashCards.Commands.DeleteFlashCard;
-using VocabularyBuilder.Application.FlashCards.Commands.UpdateFlashCard;
-using VocabularyBuilder.Application.FlashCards.Queries.GetFlashCards;
-using VocabularyBuilder.Infrastructure.Identity;
 
 namespace VocabularyBuilder.UnitTests.API.Base
 {
