@@ -31,5 +31,5 @@ This project was implemented with an structructure of _Clean Architecture, Media
 **_dotnet ef database update --project src\Infrastructure\ --startup-project src\WebAPI_**
 5. To run the Backend move to **src/WebAPI/** directory, and then execute the following:<br/>
 **_dotnet run_** <br/>
-You will see something like this:
-![alt text](https://github.com/ever1509/VocabularyBuilder/blob/master/images/APIDemo.png?raw=true)
+You will see something like this:<br/>
+![alt text](https://github.com/ever1509/VocabularyBuilder/blob/master/images/APIDemo.PNG?raw=true)
