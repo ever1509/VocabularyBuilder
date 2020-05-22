@@ -1,14 +1,14 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Application.Categories.Queries.GetCategories;
-using Application.FlashCards.Commands.AddFlashCard;
-using Application.FlashCards.Commands.UpdateFlashCard;
+using Application.FlashCards.Commands.AddFlashCardCommand;
+using Application.FlashCards.Commands.UpdateFlashCardCommand;
 using Application.FlashCards.Queries.GetFlashCards;
 using Domain.Enums;
 using FluentAssertions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using VocabularyBuilder.API.Controllers;
+using WebAPI.Controllers;
 using VocabularyBuilder.UnitTests.API.Base;
 using Xunit;
 

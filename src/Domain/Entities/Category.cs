@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Domain.Entities
 {
@@ -6,7 +8,7 @@ namespace Domain.Entities
     {
         public Category()
         {
-            FlashCards= new HashSet<FlashCard>();
+            FlashCards = new HashSet<FlashCard>();
         }
         public int CategoryId { get; set; }
         public string Description { get; set; }

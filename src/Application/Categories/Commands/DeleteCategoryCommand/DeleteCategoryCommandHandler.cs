@@ -7,7 +7,7 @@ using MediatR;
 
 namespace Application.Categories.Commands.DeleteCategoryCommand
 {
-    public class DeleteCategoryCommandHandler:IRequestHandler<DeleteCategoryCommand>
+    public class DeleteCategoryCommandHandler : IRequestHandler<DeleteCategoryCommand>
     {
         private readonly IVocabularyBuilderDbContext _context;
         public DeleteCategoryCommandHandler(IVocabularyBuilderDbContext context)

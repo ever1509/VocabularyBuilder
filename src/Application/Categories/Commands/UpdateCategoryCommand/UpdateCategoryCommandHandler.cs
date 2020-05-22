@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Categories.Commands.UpdateCategoryCommand
 {
-    public class UpdateCategoryCommandHandler:IRequestHandler<UpdateCategoryCommand>
+    public class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryCommand>
     {
         private readonly IVocabularyBuilderDbContext _context;
 
@@ -18,9 +18,9 @@ namespace Application.Categories.Commands.UpdateCategoryCommand
         }
         public async Task<Unit> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
         {
-            var entity = await _context.Categories.SingleOrDefaultAsync(c=>c.CategoryId==request.Id);
+            var entity = await _context.Categories.SingleOrDefaultAsync(c => c.CategoryId == request.Id);
 
-            if(entity==null)
+            if (entity == null)
                 throw new Exception($"{typeof(Category)} entity does'nt exist with the id {request.Id}");
 
             entity.Description = request.Description;

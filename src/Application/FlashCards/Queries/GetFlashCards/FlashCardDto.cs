@@ -1,11 +1,14 @@
-﻿using Application.Common.Mappings;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using Application.Common.Mappings;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Enums;
 
 namespace Application.FlashCards.Queries.GetFlashCards
 {
-    public class FlashCardDto:IMapFrom<FlashCardDto>
+    public class FlashCardDto : IMapFrom<FlashCardDto>
     {
         public int Id { get; set; }
         public string MainWord { get; set; }

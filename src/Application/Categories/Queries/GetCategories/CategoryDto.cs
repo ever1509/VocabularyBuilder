@@ -4,7 +4,7 @@ using Domain.Entities;
 
 namespace Application.Categories.Queries.GetCategories
 {
-    public class CategoryDto:IMapFrom<CategoryDto>
+    public class CategoryDto : IMapFrom<CategoryDto>
     {
         public int Id { get; set; }
         public string Description { get; set; }

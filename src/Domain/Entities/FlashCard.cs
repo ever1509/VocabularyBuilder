@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Domain.Entities
 {
@@ -23,6 +25,5 @@ namespace Domain.Entities
 
         //TODO: Create relationship with ApplicationUser from Identity
         //public virtual ApplicationUser User { get; set; }
-
     }
 }

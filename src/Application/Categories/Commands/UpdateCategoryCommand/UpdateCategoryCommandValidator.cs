@@ -2,7 +2,7 @@
 
 namespace Application.Categories.Commands.UpdateCategoryCommand
 {
-    public class UpdateCategoryCommandValidator:AbstractValidator<UpdateCategoryCommand>
+    public class UpdateCategoryCommandValidator : AbstractValidator<UpdateCategoryCommand>
     {
         public UpdateCategoryCommandValidator()
         {

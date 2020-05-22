@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Categories.Queries.GetCategories
 {
-    public class GetCategoriesQueryHandler:IRequestHandler<GetCategoriesQuery,CategoriesListVm>
+    public class GetCategoriesQueryHandler : IRequestHandler<GetCategoriesQuery, CategoriesListVm>
     {
         private readonly IVocabularyBuilderDbContext _context;
         private readonly IMapper _mapper;

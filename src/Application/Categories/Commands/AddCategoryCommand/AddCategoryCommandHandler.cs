@@ -8,7 +8,7 @@ using MediatR;
 
 namespace Application.Categories.Commands.AddCategoryCommand
 {
-    public class AddCategoryCommandHandler:IRequestHandler<AddCategoryCommand,CategoryDto>
+    public class AddCategoryCommandHandler : IRequestHandler<AddCategoryCommand, CategoryDto>
     {
         private readonly IVocabularyBuilderDbContext _context;
         private readonly IMapper _mapper;

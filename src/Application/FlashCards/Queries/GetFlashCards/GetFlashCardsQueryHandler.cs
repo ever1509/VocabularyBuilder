@@ -10,15 +10,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.FlashCards.Queries.GetFlashCards
 {
-    public class GetFlashCardsQueryHandler:IRequestHandler<GetFlashCardsQuery,FlashCardsListVm>
+    public class GetFlashCardsQueryHandler : IRequestHandler<GetFlashCardsQuery, FlashCardsListVm>
     {
         private readonly IVocabularyBuilderDbContext _context;
         private readonly IMapper _mapper;
+        private readonly ICurrentUserService _currentUserService;
 
-        public GetFlashCardsQueryHandler(IVocabularyBuilderDbContext context, IMapper mapper)
+        public GetFlashCardsQueryHandler(IVocabularyBuilderDbContext context, IMapper mapper, ICurrentUserService currentUserService)
         {
             _context = context;
             _mapper = mapper;
+            _currentUserService = currentUserService;
         }
         public async Task<FlashCardsListVm> Handle(GetFlashCardsQuery request, CancellationToken cancellationToken)
         {
@@ -27,10 +29,10 @@ namespace Application.FlashCards.Queries.GetFlashCards
                 try
                 {
                     var flashcards = await _context.FlashCards
-                        .Where(f => f.TypeCardId == (int)request.TypeCard)
+                        .Where(f => f.TypeCardId == (int)request.TypeCard && f.UserId==_currentUserService.UserId)
                         .ProjectTo<FlashCardDto>(_mapper.ConfigurationProvider)
                         .ToListAsync(cancellationToken);
-                   
+
                     return new FlashCardsListVm()
                     {
                         FlashCards = flashcards
@@ -41,9 +43,9 @@ namespace Application.FlashCards.Queries.GetFlashCards
                     Console.WriteLine(e);
                     throw;
                 }
-               
 
-             
+
+
             }
 
             return new FlashCardsListVm();

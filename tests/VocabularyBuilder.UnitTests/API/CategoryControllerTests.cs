@@ -6,7 +6,7 @@ using Application.Categories.Queries.GetCategories;
 using FluentAssertions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using VocabularyBuilder.API.Controllers;
+using WebAPI.Controllers;
 using VocabularyBuilder.UnitTests.API.Base;
 using Xunit;
 

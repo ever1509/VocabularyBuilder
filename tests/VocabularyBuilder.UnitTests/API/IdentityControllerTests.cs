@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Application.Common.Models.Requests;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
-using VocabularyBuilder.API.Controllers;
+using WebAPI.Controllers;
 using VocabularyBuilder.UnitTests.API.Base;
 using Xunit;
 
