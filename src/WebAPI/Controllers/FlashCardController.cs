@@ -31,7 +31,12 @@ namespace WebAPI.Controllers
             _logger = logger;
             _mediator = mediator;
         }
-
+        /// <summary>
+        /// Returns FlashCards according to the type card value
+        /// </summary>
+        /// <param name="typeCard">This parameter could be 1(Daily), 2(Weekly) or 3(Monthly)</param>
+        /// <response code="200">The values of the flashcards was returned in a good way</response>
+        /// <returns></returns>
         [HttpGet("getflashcards/{typeCard:int}")]
         public async Task<ActionResult<FlashCardsListVm>> GetFlashCards(TypeCardStatus typeCard)
         {
