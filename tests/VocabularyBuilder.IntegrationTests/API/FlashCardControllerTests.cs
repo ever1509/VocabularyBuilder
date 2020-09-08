@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Application.Categories.Queries.GetCategories;
 using Application.FlashCards.Queries.GetFlashCards;
 using FluentAssertions;
+using Newtonsoft.Json;
 using VocabularyBuilder.IntegrationTests.API.Base;
 using Xunit;
 
@@ -27,7 +28,7 @@ namespace VocabularyBuilder.IntegrationTests.API
 
             //Assert
             response.StatusCode.Should().Be(HttpStatusCode.OK);
-            (await response.Content.ReadAsAsync<CategoriesListVm>()).Categories.Should().HaveCountLessOrEqualTo(4);
+            (JsonConvert.DeserializeObject<CategoriesListVm>(await response.Content.ReadAsStringAsync())).Categories.Should().HaveCountLessOrEqualTo(4);
 
         }
 
@@ -43,7 +44,7 @@ namespace VocabularyBuilder.IntegrationTests.API
 
             //Assert
             response.StatusCode.Should().Be(HttpStatusCode.OK);
-            (await response.Content.ReadAsAsync<FlashCardsListVm>()).FlashCards.Should().HaveCountLessOrEqualTo(3);
+            (JsonConvert.DeserializeObject<FlashCardsListVm>(await response.Content.ReadAsStringAsync())).FlashCards.Should().HaveCountLessOrEqualTo(3);
 
         }
 
@@ -58,7 +59,7 @@ namespace VocabularyBuilder.IntegrationTests.API
 
             //Assert
             response.StatusCode.Should().Be(HttpStatusCode.OK);
-            var flashCardReturned = (await response.Content.ReadAsAsync<FlashCardsListVm>()).FlashCards.Last();
+            var flashCardReturned = (JsonConvert.DeserializeObject<FlashCardsListVm>(await response.Content.ReadAsStringAsync())).FlashCards.Last();
             flashCardReturned.Id.Should().Be(flashCardId);
             flashCardReturned.MainWord.Should().Be("Shoes");
 

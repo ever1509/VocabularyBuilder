@@ -8,6 +8,7 @@ using Application.Common.Models.Requests;
 using Application.Common.Models.Responses;
 using Application.FlashCards.Commands.AddFlashCardCommand;
 using Domain.Enums;
+using Newtonsoft.Json;
 using WebAPI;
 using Xunit;
 
@@ -31,22 +32,30 @@ namespace VocabularyBuilder.IntegrationTests.API.Base
         {
             var command = GetFlashCardCommand();
 
-            var response = await TestClient.PostAsJsonAsync("api/flashcard/addflashcard", command);
+            var response = await TestClient.PostAsync("api/flashcard/addflashcard", new StringContent(
+                JsonConvert.SerializeObject(command), Encoding.UTF8, "application/json"
+            ));
+            var result = await response.Content.ReadAsStringAsync();
 
-            return await response.Content.ReadAsAsync<int>();
+            return JsonConvert.DeserializeObject<int>(result);
         }
         private async Task<string> GetJwtAsync()
         {
-            var response = await TestClient.PostAsJsonAsync("api/identity/register", new UserRegistrationRequest()
-            {
-                Email = "orelle01@test.com",
-                Password = "Orelle01234!",
-                Role = null
-            });
 
-            var registrationResponse = await response.Content.ReadAsAsync<AuthSuccessResponse>();
+            var response = await TestClient.PostAsync("api/identity/register", new StringContent(
+                JsonConvert.SerializeObject(new UserRegistrationRequest()
+                {
+                    Email = "orelle01@test.com",
+                    Password = "Orelle01234!",
+                    Role = null
+                }), Encoding.UTF8, "application/json"
+            ));
 
-            return registrationResponse.Token;
+            var registrationResponse = await response.Content.ReadAsStringAsync();
+
+            var value = JsonConvert.DeserializeObject<AuthSuccessResponse>(registrationResponse).Token;
+
+            return value;
         }
         private AddFlashCardCommand GetFlashCardCommand()
         {
